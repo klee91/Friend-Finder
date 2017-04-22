@@ -1,42 +1,27 @@
+// Dependencies
+// =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require('path');
 
+//Express App
+// =============================================================
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000; 
 
-var friends [{
-
-}]
-
-app.get("/", function(req,res) {
-    res.sendFile(path.join(__dirname, "home.html"));
-});
-
-app.get("/survey", function(req,res) {
-    res.sendFile(path.join(__dirname, "survey.html"));
-});
-
-app.get("/:friends", function(req,res) {
-    var chosen = req.parameters.friends;
-    console.log(chosen);
-    res.end();
-})
-
-app.listen(3000);
-
-app.use(bodyParser.urlendcoded({ extended: false}))
-
+// Data parsing
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({type: "application/vnd.api+json"}));
+app.use('/app', express.static(path.join(__dirname, 'public')));
 
-//adding friend from survey??
-// app.post("/api/new", function(req,res) {
-//     var newFriend = req.body;
-//     newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowercase();
+require("./app/routing/api-routes")(app);
+require("./app/routing/html-routes")(app);
 
-//     console.log(newFriend);
+app.get("/api/friends", function(req,res) {
+        res.json(friendsData);
+    });
 
-//     friends.push(newFriend);
-
-//     res.json(newFriend);
-// });
-
+app.listen(PORT, function() {
+    console.log("App listening on PORT: " + PORT) });
