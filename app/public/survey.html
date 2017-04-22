@@ -29,9 +29,11 @@
     }
 </style>
 <body>
-    <div class="container jumbotron">
-        <h1 class="header text-center">Friend Finder</h1>
-    </div>
+    <div class="jumbotron">
+            <h1 class="header text-center">The Amazing Friend Finder!</h1>
+
+            <a href="/"><div class="text-center"><button type="button" class="btn btn-primary btn-lg text-center"><span class="glyphicon glyphicon glyphicon-home"></span> Home</button></div></a>
+        </div>
 
     <!-- alert modal for form validation -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -228,28 +230,6 @@
         nine = parseInt($('#quest9').val());;
         ten = parseInt($('#quest10').val());
         
-        //validate that all questions were answered
-        // function validateForm() {
-        //     var valid = true;
-        //     $('select').each(function () {
-        //         if ($(this).val() === '') {
-        //             valid = false;
-        //             return false;
-        //         }
-        //     });
-        //     return valid
-        // }
-        // validateForm();
-
-        // if (typeof one || two || three || four || five || six || seven || eight || nine || ten !== number) {
-        //    $(".modal-body1").empty();
-        //    var tempDiv = $('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>');
-        //    $(".modal-body1").append(tempDiv);
-        //    $(".modal-header").html("Please fill out all form questions!");
-        //    $("#myModal").modal("show");
-        //    return
-        // } 
-        
         //new user object
         var user = {
             name: $('#name').val().trim(),
@@ -270,7 +250,6 @@
            $(".modal-header").html("Your New Friend!" + "<br>Name: " + data.name + "<br><img src='" + data.photo + "'/><br>");
            $("#resultModal").modal("show");
         }
-            
 
           // Reset form
           $("#name").val(" ");
@@ -285,9 +264,6 @@
           $("#quest8").val("Select an Option");
           $("#quest9").val("Select an Option");
           $("#quest10").val("Select an Option");
-
-           
-
         });
         
     });
